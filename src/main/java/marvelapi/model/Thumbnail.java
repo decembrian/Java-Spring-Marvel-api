@@ -12,11 +12,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Character {
-    Integer id;
-    String name;
-    String description;
-    String modified;
-    Thumbnail thumbnail;
-    String resourceUrl;
+public class Thumbnail {
+    String path;
+    String extension;
 }
