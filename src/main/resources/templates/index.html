@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MarvelAPI</title>
+</head>
+<body>
+<div>
+    <a th:href="@{/characters}">View character json response.</a>
+</div>
+<div>
+    <form th:action="@{/characters/{id}(id=${character_id})}" th:method="get">
+        <label th:text="asdadad">LABEL</label>
+        <input type="submit" value="SUBMIT">
+    </form>
+</div>
+</body>
+</html>

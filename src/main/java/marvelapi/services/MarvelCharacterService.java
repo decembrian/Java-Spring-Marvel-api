@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 @Service
 @Slf4j
 @PropertySource("classpath:application.properties")
-public class MarvelService {
+public class MarvelCharacterService {
     private WebClient client;
 
     private final String END_POINT = "https://gateway.marvel.com:443/v1/public/";
@@ -24,7 +24,7 @@ public class MarvelService {
     private String privateKey;
     private final String API_KEY = "0e2ea8edc0a2c459a9867b607814fadf";
 
-    public MarvelService(WebClient.Builder builder) {
+    public MarvelCharacterService(WebClient.Builder builder) {
         client = builder.baseUrl(END_POINT).build();
     }
 
@@ -54,7 +54,6 @@ public class MarvelService {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(CharactersData.class);
-
     }
 }
 

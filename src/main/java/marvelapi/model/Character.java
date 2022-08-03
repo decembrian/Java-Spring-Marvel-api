@@ -1,6 +1,7 @@
 package marvelapi.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,6 @@ public class Character {
     String description;
     String modified;
     Thumbnail thumbnail;
+    @JsonProperty("resourceURI")
     String resourceUrl;
 }
