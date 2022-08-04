@@ -1,4 +1,4 @@
-package marvelapi.services;
+package marvelapi.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

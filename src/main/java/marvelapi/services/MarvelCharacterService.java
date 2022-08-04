@@ -18,11 +18,8 @@ public class MarvelCharacterService {
     private WebClient client;
 
     private final String END_POINT = "https://gateway.marvel.com:443/v1/public/";
-    @Value("${marvel.publicapikey}")
-    private String publicKey;
-    @Value("${marvel.privateapikey}")
-    private String privateKey;
-    private final String API_KEY = "0e2ea8edc0a2c459a9867b607814fadf";
+    private final String publicKey = System.getenv("PUBLIC_KEY");
+    private final String privateKey = System.getenv("PRIVATE_KEY");
 
     public MarvelCharacterService(WebClient.Builder builder) {
         client = builder.baseUrl(END_POINT).build();
