@@ -1,4 +1,4 @@
-package marvelapi.model;
+package marvelapi.model.character;
 
 import lombok.Data;
 

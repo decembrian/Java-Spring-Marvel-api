@@ -1,4 +1,4 @@
-package marvelapi.model;
+package marvelapi.model.character;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;

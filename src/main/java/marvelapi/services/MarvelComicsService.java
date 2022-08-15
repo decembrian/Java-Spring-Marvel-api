@@ -1,7 +1,6 @@
 package marvelapi.services;
 
-import lombok.extern.slf4j.Slf4j;
-import marvelapi.model.character.CharactersData;
+import marvelapi.model.comics.Comics;
 import marvelapi.model.comics.ComicsData;
 import marvelapi.utils.CharacterUtils;
 import org.springframework.context.annotation.PropertySource;
@@ -12,45 +11,43 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-@Slf4j
 @PropertySource("classpath:application.properties")
-public class MarvelCharacterService {
+public class MarvelComicsService {
     private WebClient client;
-
     private final String END_POINT = "https://gateway.marvel.com:443/v1/public/";
+
     private final String publicKey = System.getenv("PUBLIC_KEY");
     private final String privateKey = System.getenv("PRIVATE_KEY");
 
-    public MarvelCharacterService(WebClient.Builder builder) {
+    public MarvelComicsService(WebClient.Builder builder){
         client = builder.baseUrl(END_POINT).build();
     }
 
-    public Flux<CharactersData> getCharacters() {
+    public Mono<ComicsData> getComicsById(Integer id){
         return client
                 .get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/characters")
+                        .path("/comics/" + id)
                         .queryParam("ts", CharacterUtils.timeStamp)
                         .queryParam("apikey", publicKey)
                         .queryParam("hash", CharacterUtils.md5Apache(publicKey, privateKey, CharacterUtils.timeStamp))
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToFlux(CharactersData.class);
+                .bodyToMono(ComicsData.class);
     }
 
-    public Mono<CharactersData> getCharacterById(Integer id) {
+    public Flux<ComicsData> getComics(){
         return client
                 .get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/characters/" + id)
+                        .path("/comics")
                         .queryParam("ts", CharacterUtils.timeStamp)
                         .queryParam("apikey", publicKey)
                         .queryParam("hash", CharacterUtils.md5Apache(publicKey, privateKey, CharacterUtils.timeStamp))
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToMono(CharactersData.class);
+                .bodyToFlux(ComicsData.class);
     }
 }
-
